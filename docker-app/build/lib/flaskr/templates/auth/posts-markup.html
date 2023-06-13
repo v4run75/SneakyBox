@@ -1,0 +1,27 @@
+{% extends 'base-post.html' %}
+
+
+{% block content %}
+    <h1>{% block title %} Blogs list {% endblock %}</h1>
+        <a class="action" href="{{ url_for('auth.create_post') }}">New</a>
+
+    {% for post in posts %}
+    <div class="card">
+        <div class="card-body">
+
+            <span class="badge badge-primary">#{{ post['id'] }}</span>
+            <span class="badge badge-default">{{ post['title'] }}</span>
+            <span class="badge badge-default">{{ post['created'] }}</span>
+            <span class="badge badge-default">by {{ post['username'] }}</span>
+            <span class="badge badge-default">
+        {% if g.user['id'] == post['author_id'] %}
+          <a class="action" href="{{ url_for('auth.update', id=post['id']) }}">Edit</a>
+        {% endif %}
+            <hr>
+            </span>
+            <p>{{ post['body'] |safe }}</p>
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+{% endblock %}

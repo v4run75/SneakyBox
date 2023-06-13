@@ -1,0 +1,42 @@
+<!-- blog.html -->
+<html>
+  <head>
+    <title>My Blog</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  </head>
+  <body>
+<nav>
+  <h1>Voidd Blog</h1>
+  <ul>
+    {% if g.user %}
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+
+    {% for post in posts %}
+      <h1>{{ post.title }}</h1>
+      {{ post.content|safe }}
+    {% endfor %}
+  </body>
+</html>
+
+<!-- admin.html -->
+<html>
+  <head>
+    <title>Admin Panel</title>
+  </head>
+  <body>
+    <form action="/auth/create" method="post">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title"><br>
+      <label for="body">Content:</label>
+      <textarea id="body" name="body"></textarea><br>
+      <input type="submit" value="Create">
+    </form>
+  </body>
+</html>

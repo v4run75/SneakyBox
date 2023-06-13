@@ -1,0 +1,20 @@
+{% extends 'base-post-single.html' %}
+
+
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <span class="badge badge-primary">#{{ post['id'] }}</span>
+        <span class="badge badge-default"><h1>{{ post['title'] }}</h1></span>
+        <span class="badge badge-default">{{ post['created'] }}</span>
+        <span class="badge badge-default">by {{ post['username'] }}</span>
+        <span class="badge badge-default">
+
+            <hr>
+        </span>
+        <p>{{ post['body'] |safe }}</p>
+    </div>
+</div>
+<hr>
+{% endblock %}
